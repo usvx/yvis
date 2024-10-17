@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
-        script-src 'self' https://cdnjs.cloudflare.com;
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        script-src 'self' https://cdn.jsdelivr.net;
+        style-src 'self' https://fonts.googleapis.com;
         img-src 'self' data:;
         font-src 'self' https://fonts.gstatic.com data:;
         connect-src 'self';
-        frame-ancestors 'none';
     ">
+    <meta name="referrer" content="no-referrer">
     <link rel="icon" href="favicons/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
@@ -20,72 +20,67 @@
     <link rel="manifest" href="favicons/site.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;700&display=swap&subset=latin,cyrillic-ext,korean" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <noscript>
+        <link rel="stylesheet" href="css/noscript.css">
+    </noscript>
 </head>
 <body>
-    <div id="preloader">
+    <div id="preloader" aria-label="Loading">
         <div class="loader"></div>
     </div>
-    <canvas id="background"></canvas>
+    <canvas id="background" aria-hidden="true" loading="lazy"></canvas>
     <main>
         <div class="entrance">
             <h1>Lumina</h1>
-            <form id="login-form">
+            <form id="login-form" aria-label="Login Form">
                 <div class="input-container">
-                    <input type="text" name="username" placeholder="Username" required>
+                    <label for="username" class="visually-hidden">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required autocomplete="username" aria-required="true">
                 </div>
                 <div class="input-container">
+                    <label for="domain" class="visually-hidden">Domain</label>
                     <div class="custom-select">
-                        <select name="domain" required>
+                        <select id="domain" name="domain" required autocomplete="off" aria-required="true">
                             <option value="" disabled selected>Select Domain</option>
+                            <option value="@gj.to">@gj.to</option>
                             <option value="@ko.vc">@ko.vc</option>
                             <option value="@yv.is">@yv.is</option>
                         </select>
                     </div>
                 </div>
-                <button type="submit">Enter</button>
+                <button type="submit" aria-label="Enter">Enter</button>
             </form>
         </div>
     </main>
     <noscript>
-        <style>
-            #preloader, #background {
-                display: none;
-            }
-            body {
-                background-color: #0a0a0a;
-                color: #e0e0e0;
-                font-family: 'Urbanist', sans-serif;
-            }
-            .entrance {
-                opacity: 1;
-                animation: none;
-                padding-top: 100px;
-            }
-        </style>
-        <main>
-            <div class="entrance">
-                <h1>Lumina</h1>
-                <p>Welcome to Lumina. Please enable JavaScript to experience the full site features.</p>
-                <form action="https://accounts.google.com/AccountChooser" method="get">
-                    <div class="input-container">
-                        <input type="text" name="Email" placeholder="Username" required>
-                    </div>
-                    <div class="input-container">
-                        <div class="custom-select">
-                            <select name="domain" required>
-                                <option value="" disabled selected>Select Domain</option>
-                                <option value="@ko.vc">@ko.vc</option>
-                                <option value="@yv.is">@yv.is</option>
-                            </select>
+        <div id="noscript-wrapper">
+            <main>
+                <div class="entrance">
+                    <h1>Lumina</h1>
+                    <form action="https://accounts.google.com/AccountChooser" method="get">
+                        <div class="input-container">
+                            <label for="Email" class="visually-hidden">Username</label>
+                            <input type="text" id="Email" name="Email" placeholder="Username" required autocomplete="username" aria-required="true">
                         </div>
-                    </div>
-                    <input type="hidden" name="continue" value="https://mail.google.com/a/">
-                    <button type="submit">Enter</button>
-                </form>
-            </div>
-        </main>
+                        <div class="input-container">
+                            <label for="domain-noscript" class="visually-hidden">Domain</label>
+                            <div class="custom-select">
+                                <select id="domain-noscript" name="domain" required autocomplete="off" aria-required="true">
+                                    <option value="" disabled selected>Select Domain</option>
+                                    <option value="@gj.to">@gj.to</option>
+                                    <option value="@ko.vc">@ko.vc</option>
+                                    <option value="@yv.is">@yv.is</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" name="continue" value="https://mail.google.com/a/">
+                        <button type="submit" aria-label="Enter">Enter</button>
+                    </form>
+                </div>
+            </main>
+        </div>
     </noscript>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-    <script src="js/script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js" integrity="sha384-aUS0jUAjhhBFNPifgxTHTNcsZDqkbegLd/JKEhJzK3Lyg9nFF1PZ2J++mzKwd8Kz" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
